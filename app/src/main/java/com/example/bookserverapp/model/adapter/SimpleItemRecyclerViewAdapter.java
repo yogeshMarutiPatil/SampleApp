@@ -3,6 +3,7 @@ package com.example.bookserverapp.model.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class SimpleItemRecyclerViewAdapter
         extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
     private final ItemListActivity mParentActivity;
-    private final List<BooksList> mValues;
+    private  List<BooksList> mValues;
     private final boolean mTwoPane;
 
 
@@ -52,12 +53,13 @@ public class SimpleItemRecyclerViewAdapter
     public SimpleItemRecyclerViewAdapter(ItemListActivity parent,
                                          List<BooksList> items,
                                          boolean twoPane) {
-        mValues = items;
         mParentActivity = parent;
+        mValues = items;
         mTwoPane = twoPane;
     }
 
     public void addBookList(BooksList bookList) {
+        Log.d("ADDBOOKLIST",bookList.title);
         mValues.add(bookList);
         notifyDataSetChanged();
     }
@@ -73,14 +75,15 @@ public class SimpleItemRecyclerViewAdapter
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         BooksList currentBookList = mValues.get(position);
-        holder.mTitle.setText(currentBookList.title);
-        holder.mIsbn.setText(currentBookList.isbn);
-        holder.mPrice.setText(currentBookList.price);
-        holder.mCurrencyCode.setText(currentBookList.currencyCode);
-        holder.mAuthor.setText(currentBookList.author);
+        holder.mId.setText(String.valueOf(currentBookList.id));
+        holder.mTitle.setText(String.valueOf(currentBookList.title));
+        holder.mIsbn.setText(String.valueOf(currentBookList.isbn));
+        holder.mPrice.setText(String.valueOf(currentBookList.price));
+        holder.mCurrencyCode.setText(String.valueOf(currentBookList.currencyCode));
+        holder.mAuthor.setText(String.valueOf(currentBookList.author));
 
-        holder.itemView.setTag(mValues.get(position));
-        holder.itemView.setOnClickListener(mOnClickListener);
+        /*holder.itemView.setTag(mValues.get(position));
+        holder.itemView.setOnClickListener(mOnClickListener);*/
     }
 
     @Override

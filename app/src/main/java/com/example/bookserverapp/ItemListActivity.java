@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.bookserverapp.dummy.DummyContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
     private boolean mTwoPane;
     private Controller mController;
     private SimpleItemRecyclerViewAdapter mBookListAdapter;
+    public static final List<BooksList> ITEMS = new ArrayList<BooksList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +82,10 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ItemListActivity.this));
+        mBookListAdapter = new SimpleItemRecyclerViewAdapter(this, ITEMS, mTwoPane);
+        recyclerView.setAdapter(mBookListAdapter);
     }
 
 
