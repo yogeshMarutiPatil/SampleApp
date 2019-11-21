@@ -8,7 +8,7 @@ public class BooksList {
 
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public int id;
     @SerializedName("title")
     @Expose
     public String title;
@@ -17,7 +17,7 @@ public class BooksList {
     public String isbn;
     @SerializedName("price")
     @Expose
-    public Integer price;
+    public int price;
     @SerializedName("currencyCode")
     @Expose
     public String currencyCode;
@@ -25,16 +25,16 @@ public class BooksList {
     @Expose
     public String author;
 
-    private BooksList(Builder builder){
+    /*public BooksList(Builder builder){
         id = builder.id;
         title = builder.title;
         isbn = builder.isbn;
         price = builder.price;
         currencyCode = builder.currencyCode;
         author = builder.author;
-    }
+    }*/
 
-
+/*
     public static class Builder {
         private Integer id;
         private String title;
@@ -43,7 +43,7 @@ public class BooksList {
         private String currencyCode;
         private String author;
 
-        public Builder setId(Integer id) {
+        public Builder setId(int id) {
             id = id;
             return Builder.this;
         }
@@ -58,7 +58,7 @@ public class BooksList {
             return Builder.this;
         }
 
-        public Builder setPrice(Integer price) {
+        public Builder setPrice(int price) {
             price = price;
             return Builder.this;
         }
@@ -68,13 +68,18 @@ public class BooksList {
             return Builder.this;
         }
 
+        public Builder setAuthor(String author) {
+            author = author;
+            return Builder.this;
+        }
+
         public BooksList build() {
             return new BooksList(Builder.this);
         }
 
-    }
+    }*/
 
-    /*public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -120,6 +125,6 @@ public class BooksList {
 
     public void setAuthor(String author) {
         this.author = author;
-    }*/
+    }
 
 }

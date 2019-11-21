@@ -91,6 +91,7 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
 
     @Override
     public void onFetchProgress(BooksList book) {
+        Log.d("INSIDE onFETCH","NSIDE onFETCH");
         Log.d("BOOK TITLE",book.title);
         mBookListAdapter.addBookList(book);
 

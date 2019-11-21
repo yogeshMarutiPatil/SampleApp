@@ -43,13 +43,23 @@ public class Controller {
                     for(int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        BooksList booksList = new BooksList.Builder()
-                                .setId(object.getInt("id"))
-                                .setTitle(object.getString("title"))
+                        BooksList booksList = new BooksList();
+
+                        booksList.setId(object.getInt("id"));
+                        booksList.setTitle(object.getString("title"));
+                        booksList.setIsbn(object.getString("isbn"));
+                        booksList.setPrice(object.getInt("price"));
+                        booksList.setCurrencyCode(object.getString("currencyCode"));
+                        booksList.setAuthor(object.getString("author"));
+
+                                /*.setTitle(object.getString("title"))
                                 .setIsbn(object.getString("isbn"))
                                 .setPrice(object.getInt("price"))
                                 .setCurrencyCode(object.getString("currencyCode"))
-                                .build();
+                                .setAuthor(object.getString("author"))
+                                .build();*/
+
+                        Log.d("BOOK TITLE",booksList.title);
 
                         mListener.onFetchProgress(booksList);
 
