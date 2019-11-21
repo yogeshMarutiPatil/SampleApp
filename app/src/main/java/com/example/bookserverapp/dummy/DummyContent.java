@@ -20,12 +20,12 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyContent.DummyItem> ITEMS = new ArrayList<DummyContent.DummyItem>();
+    public static final List<BooksList> ITEMS = new ArrayList<BooksList>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, BooksList> ITEM_MAP = new HashMap<String, BooksList>();
 
     private static final int COUNT = 25;
 
@@ -43,7 +43,7 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    /*public static class DummyItem {
 
         @SerializedName("id")
         @Expose
@@ -113,5 +113,5 @@ public class DummyContent {
             this.author = author;
         }
 
-    }
+    }*/
 }

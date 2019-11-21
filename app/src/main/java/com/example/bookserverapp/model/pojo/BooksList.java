@@ -8,25 +8,73 @@ public class BooksList {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
     @SerializedName("isbn")
     @Expose
-    private String isbn;
+    public String isbn;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    public Integer price;
     @SerializedName("currencyCode")
     @Expose
-    private String currencyCode;
+    public String currencyCode;
     @SerializedName("author")
     @Expose
-    private String author;
+    public String author;
+
+    private BooksList(Builder builder){
+        id = builder.id;
+        title = builder.title;
+        isbn = builder.isbn;
+        price = builder.price;
+        currencyCode = builder.currencyCode;
+        author = builder.author;
+    }
 
 
-    public Integer getId() {
+    public static class Builder {
+        private Integer id;
+        private String title;
+        private String isbn;
+        private Integer price;
+        private String currencyCode;
+        private String author;
+
+        public Builder setId(Integer id) {
+            id = id;
+            return Builder.this;
+        }
+
+        public Builder setTitle(String title) {
+            title = title;
+            return Builder.this;
+        }
+
+        public Builder setIsbn(String isbn) {
+            isbn = isbn;
+            return Builder.this;
+        }
+
+        public Builder setPrice(Integer price) {
+            price = price;
+            return Builder.this;
+        }
+
+        public Builder setCurrencyCode(String currencyCode) {
+            currencyCode = currencyCode;
+            return Builder.this;
+        }
+
+        public BooksList build() {
+            return new BooksList(Builder.this);
+        }
+
+    }
+
+    /*public Integer getId() {
         return id;
     }
 
@@ -72,6 +120,6 @@ public class BooksList {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
+    }*/
 
 }

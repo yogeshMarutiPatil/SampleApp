@@ -43,12 +43,13 @@ public class Controller {
                     for(int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        DummyContent.DummyItem booksList = new DummyContent.DummyItem();
-                        booksList.setTitle(object.getString("title"));
-                        booksList.setAuthor(object.getString("author"));
-                        booksList.setIsbn(object.getString("isbn"));
-                        booksList.setPrice(object.getInt("price"));
-                        booksList.setCurrencyCode(object.getString("currencyCode"));
+                        BooksList booksList = new BooksList.Builder()
+                                .setId(object.getInt("id"))
+                                .setTitle(object.getString("title"))
+                                .setIsbn(object.getString("isbn"))
+                                .setPrice(object.getInt("price"))
+                                .setCurrencyCode(object.getString("currencyCode"))
+                                .build();
 
                         mListener.onFetchProgress(booksList);
 
@@ -74,8 +75,8 @@ public class Controller {
     public interface BookListCallbackListener {
 
         void onFetchStart();
-        void onFetchProgress(DummyContent.DummyItem flower);
-        void onFetchProgress(List<DummyContent.DummyItem> flowerList);
+        void onFetchProgress(BooksList bookList);
+        void onFetchProgress(List<BooksList> flowerList);
         void onFetchComplete();
         void onFetchFailed();
     }

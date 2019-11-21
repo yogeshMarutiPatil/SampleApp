@@ -14,7 +14,7 @@ public class BooksListApiManager {
 
         if(mBookListApi == null) {
             GsonBuilder gson = new GsonBuilder();
-            gson.registerTypeAdapter(DummyContent.DummyItem.class, new StringDeserializer());
+            gson.registerTypeAdapter(String.class, new StringDeserializer());
 
             mBookListApi = new RestAdapter.Builder()
                     .setEndpoint(Constants.BASE_URL)
