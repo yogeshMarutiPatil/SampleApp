@@ -1,6 +1,5 @@
 package com.example.bookserverapp.model.api;
 
-import com.example.bookserverapp.dummy.DummyContent;
 import com.example.bookserverapp.model.utilities.Constants;
 import com.google.gson.GsonBuilder;
 

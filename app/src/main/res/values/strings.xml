@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BookServerApp</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="title">Title </string>
+    <string name="isbn">ISBN </string>
+    <string name="price">Price </string>
+    <string name="author">Author </string>
 </resources>

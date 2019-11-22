@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bookserverapp.ItemDetailActivity;
-import com.example.bookserverapp.ItemDetailFragment;
-import com.example.bookserverapp.ItemListActivity;
+import com.example.bookserverapp.view.ItemDetailActivity;
+import com.example.bookserverapp.view.ItemDetailFragment;
+import com.example.bookserverapp.view.ItemListActivity;
 import com.example.bookserverapp.R;
 import com.example.bookserverapp.model.pojo.BooksList;
 
@@ -34,7 +34,7 @@ public class SimpleItemRecyclerViewAdapter
             BooksList item = (BooksList) view.getTag();
             if (mTwoPane) {
                 Bundle arguments = new Bundle();
-                arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.title);
+                arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.getId().toString());
                 ItemDetailFragment fragment = new ItemDetailFragment();
                 fragment.setArguments(arguments);
                 mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -43,7 +43,8 @@ public class SimpleItemRecyclerViewAdapter
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ItemDetailActivity.class);
-                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.title);
+                Log.d("GETID",String.valueOf(item.getId()));
+                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, String.valueOf(item.getId()));
 
                 context.startActivity(intent);
             }
@@ -59,7 +60,6 @@ public class SimpleItemRecyclerViewAdapter
     }
 
     public void addBookList(BooksList bookList) {
-        Log.d("ADDBOOKLIST",bookList.title);
         mValues.add(bookList);
         notifyDataSetChanged();
     }
@@ -75,15 +75,15 @@ public class SimpleItemRecyclerViewAdapter
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         BooksList currentBookList = mValues.get(position);
-        holder.mId.setText(String.valueOf(currentBookList.id));
-        holder.mTitle.setText(String.valueOf(currentBookList.title));
-        holder.mIsbn.setText(String.valueOf(currentBookList.isbn));
-        holder.mPrice.setText(String.valueOf(currentBookList.price));
-        holder.mCurrencyCode.setText(String.valueOf(currentBookList.currencyCode));
-        holder.mAuthor.setText(String.valueOf(currentBookList.author));
+        //holder.mId.setText(String.valueOf(currentBookList.id));
+        holder.mTitle.setText("Title: " + String.valueOf(currentBookList.getTitle()));
+        holder.mIsbn.setText("ISBN: " + String.valueOf(currentBookList.getIsbn()));
+        holder.mPrice.setText("Price: " + String.valueOf(currentBookList.getPrice()) + " " + String.valueOf(currentBookList.getCurrencyCode()));
+        //holder.mCurrencyCode.setText(String.valueOf(currentBookList.currencyCode));
+        holder.mAuthor.setText("Author: " + String.valueOf(currentBookList.getAuthor()));
 
-        /*holder.itemView.setTag(mValues.get(position));
-        holder.itemView.setOnClickListener(mOnClickListener);*/
+        holder.itemView.setTag(mValues.get(position));
+        holder.itemView.setOnClickListener(mOnClickListener);
     }
 
     @Override
@@ -92,20 +92,16 @@ public class SimpleItemRecyclerViewAdapter
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView mId;
         final TextView mTitle;
         final TextView mIsbn;
         final TextView mPrice;
-        final TextView mCurrencyCode;
         final TextView mAuthor;
 
         ViewHolder(View view) {
             super(view);
-            mId = (TextView) view.findViewById(R.id.id_text);
             mTitle = (TextView) view.findViewById(R.id.title_text);
             mIsbn = (TextView) view.findViewById(R.id.isbn);
             mPrice = (TextView) view.findViewById(R.id.price);
-            mCurrencyCode = (TextView) view.findViewById(R.id.currencyCode);
             mAuthor = (TextView) view.findViewById(R.id.author);
 
         }

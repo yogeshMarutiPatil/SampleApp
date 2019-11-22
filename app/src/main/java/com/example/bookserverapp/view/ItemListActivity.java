@@ -1,8 +1,5 @@
-package com.example.bookserverapp;
+package com.example.bookserverapp.view;
 
-import android.content.Context;
-import android.content.Intent;
-import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,22 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.bookserverapp.R;
 import com.example.bookserverapp.controller.Controller;
 import com.example.bookserverapp.model.adapter.SimpleItemRecyclerViewAdapter;
 import com.example.bookserverapp.model.pojo.BooksList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.bookserverapp.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An activity representing a list of Items. This activity
@@ -46,6 +40,7 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
     private Controller mController;
     private SimpleItemRecyclerViewAdapter mBookListAdapter;
     public static final List<BooksList> ITEMS = new ArrayList<BooksList>();
+    public static final Map<String, BooksList> ITEM_MAP = new HashMap<String, BooksList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +92,6 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
 
     @Override
     public void onFetchProgress(BooksList book) {
-        Log.d("INSIDE onFETCH","NSIDE onFETCH");
-        Log.d("BOOK TITLE",book.title);
         mBookListAdapter.addBookList(book);
 
     }

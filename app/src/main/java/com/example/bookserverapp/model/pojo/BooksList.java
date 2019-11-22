@@ -8,76 +8,22 @@ public class BooksList {
 
     @SerializedName("id")
     @Expose
-    public int id;
+    private int id;
     @SerializedName("title")
     @Expose
-    public String title;
+    private String title;
     @SerializedName("isbn")
     @Expose
-    public String isbn;
+    private String isbn;
     @SerializedName("price")
     @Expose
-    public int price;
+    private int price;
     @SerializedName("currencyCode")
     @Expose
-    public String currencyCode;
+    private String currencyCode;
     @SerializedName("author")
     @Expose
-    public String author;
-
-    /*public BooksList(Builder builder){
-        id = builder.id;
-        title = builder.title;
-        isbn = builder.isbn;
-        price = builder.price;
-        currencyCode = builder.currencyCode;
-        author = builder.author;
-    }*/
-
-/*
-    public static class Builder {
-        private Integer id;
-        private String title;
-        private String isbn;
-        private Integer price;
-        private String currencyCode;
-        private String author;
-
-        public Builder setId(int id) {
-            id = id;
-            return Builder.this;
-        }
-
-        public Builder setTitle(String title) {
-            title = title;
-            return Builder.this;
-        }
-
-        public Builder setIsbn(String isbn) {
-            isbn = isbn;
-            return Builder.this;
-        }
-
-        public Builder setPrice(int price) {
-            price = price;
-            return Builder.this;
-        }
-
-        public Builder setCurrencyCode(String currencyCode) {
-            currencyCode = currencyCode;
-            return Builder.this;
-        }
-
-        public Builder setAuthor(String author) {
-            author = author;
-            return Builder.this;
-        }
-
-        public BooksList build() {
-            return new BooksList(Builder.this);
-        }
-
-    }*/
+    private String author;
 
     public Integer getId() {
         return id;
