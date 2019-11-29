@@ -3,8 +3,12 @@ package com.example.bookserverapp.controller;
 import android.util.Log;
 
 import com.example.bookserverapp.model.api.BooksListApiManager;
+import com.example.bookserverapp.model.pojo.Book;
 import com.example.bookserverapp.model.pojo.BooksList;
+import com.example.bookserverapp.model.utilities.BookDescEvent;
+import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +24,7 @@ public class Controller {
     private static final String TAG = Controller.class.getSimpleName();
     private BookListCallbackListener mListener;
     private BooksListApiManager mApiManager;
+    private static Book bookDesc;
 
     public Controller(BookListCallbackListener listener) {
         mListener = listener;
@@ -32,8 +37,6 @@ public class Controller {
         mApiManager.getBookListApi().getBooksList(new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                Log.d(TAG, "JSON :: " + s);
-
                 try {
                     JSONArray array = new JSONArray(s);
 
@@ -70,37 +73,18 @@ public class Controller {
     }
 
 
-    /*public void startFetchingBooksDesc() {
-        mApiManager.getBookListApi().getBookDesc(new Callback<String>() {
+    public void startFetchingBooksDesc(int id) {
+        mApiManager.getBookListApi().getBooksDesc(id,new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                Log.d(TAG, "JSON :: " + s);
+                Log.d("STARTFETCH", "JSON :: " + s);
 
-                try {
-                    JSONArray array = new JSONArray(s);
+                Gson gson = new Gson();
+                bookDesc = gson.fromJson(s, Book.class);
 
-                    for(int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
+                Log.d("AUTHOR1",bookDesc.getAuthor());
 
-                        Book bookDesc = new Book();
-
-                        bookDesc.setId(object.getInt("id"));
-                        bookDesc.setTitle(object.getString("title"));
-                        bookDesc.setDescription(object.getString("description"));
-                        bookDesc.setIsbn(object.getString("isbn"));
-                        bookDesc.setPrice(object.getInt("price"));
-                        bookDesc.setCurrencyCode(object.getString("currencyCode"));
-                        bookDesc.setAuthor(object.getString("author"));
-
-
-                    }
-
-                } catch (JSONException e) {
-                    mListener.onFetchFailed();
-                }
-
-
-                mListener.onFetchComplete();
+                mListener.onFetchProgressBookDesc(bookDesc);
             }
 
             @Override
@@ -109,14 +93,24 @@ public class Controller {
                 mListener.onFetchComplete();
             }
         });
+
+        if(bookDesc!= null){
+            Log.d("AUTHOR2",bookDesc.getAuthor());
+        }
+
     }
 
-*/
+    public Book getBookDescription(){
+        return this.bookDesc;
+    }
+
+
 
     public interface BookListCallbackListener {
 
         void onFetchStart();
         void onFetchProgress(BooksList bookList);
+        void onFetchProgressBookDesc(Book bookDesc);
         void onFetchProgress(List<BooksList> flowerList);
         void onFetchComplete();
         void onFetchFailed();

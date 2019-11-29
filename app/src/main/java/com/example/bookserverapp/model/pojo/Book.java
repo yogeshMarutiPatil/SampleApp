@@ -8,7 +8,7 @@ public class Book {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -20,7 +20,7 @@ public class Book {
     private String description;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private int price;
     @SerializedName("currencyCode")
     @Expose
     private String currencyCode;
@@ -28,11 +28,11 @@ public class Book {
     @Expose
     private String author;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class Book {
         this.description = description;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.bookserverapp.R;
 import com.example.bookserverapp.controller.Controller;
 import com.example.bookserverapp.model.adapter.SimpleItemRecyclerViewAdapter;
+import com.example.bookserverapp.model.pojo.Book;
 import com.example.bookserverapp.model.pojo.BooksList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -93,6 +94,11 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
     @Override
     public void onFetchProgress(BooksList book) {
         mBookListAdapter.addBookList(book);
+
+    }
+
+    @Override
+    public void onFetchProgressBookDesc(Book bookDesc) {
 
     }
 

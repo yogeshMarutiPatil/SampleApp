@@ -43,7 +43,6 @@ public class SimpleItemRecyclerViewAdapter
             } else {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ItemDetailActivity.class);
-                Log.d("GETID",String.valueOf(item.getId()));
                 intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, String.valueOf(item.getId()));
 
                 context.startActivity(intent);
