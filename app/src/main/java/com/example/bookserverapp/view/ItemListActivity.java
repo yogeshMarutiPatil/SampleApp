@@ -49,7 +49,7 @@ public class ItemListActivity extends AppCompatActivity implements Controller.Bo
         setContentView(R.layout.activity_item_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mController = new Controller(ItemListActivity.this);
+        mController = new Controller(this);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 

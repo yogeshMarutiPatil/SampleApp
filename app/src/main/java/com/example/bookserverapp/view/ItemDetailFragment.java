@@ -36,9 +36,10 @@ public class ItemDetailFragment extends Fragment implements Controller.BookListC
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-    public static Book BOOK_Desc_ITEMS ;
+    public Book bookDescriptionItem ;
     public Book bookDescItem;
-
+    public TextView authorname;
+    public View rootView;
     private Controller mController;
     /**
      * The dummy content this fragment is presenting.
@@ -55,8 +56,10 @@ public class ItemDetailFragment extends Fragment implements Controller.BookListC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BOOK_Desc_ITEMS = new Book();
-        mController= new Controller(ItemDetailFragment.this);
+        bookDescriptionItem = new Book();
+
+        mController= new Controller(this);
+
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
@@ -78,10 +81,10 @@ public class ItemDetailFragment extends Fragment implements Controller.BookListC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
+        rootView = inflater.inflate(R.layout.item_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        //if (mItem != null) {
+       //if (mItem != null) {
 
             Bundle bundle = this.getArguments();
             String book_id = bundle.getString(ItemDetailFragment.ARG_ITEM_ID);
@@ -89,18 +92,19 @@ public class ItemDetailFragment extends Fragment implements Controller.BookListC
             int id = Integer.parseInt(book_id);
 
             //Api call
-            mController.startFetchingBooksDesc(id);
-            mController.getBookDescription();
 
-            Log.d("BOOKDESC", BOOK_Desc_ITEMS.getAuthor());
+            mController.startFetchingBooksDesc(id);
+            //mController.getBookDescription();
+
+           // Log.d("BOOKDESC", BOOK_Desc_ITEMS.getAuthor());
 
             //Log.d("BOOKDESC", mController.getBookDescription().getAuthor());
             //mItem = bundle.get(ItemDetailFragment.ARG_ITEM_ID);
 
         //Display elements in fragment
 
-            //((TextView) rootView.findViewById(R.id.item_detail)).setText(bookDescription.getAuthor());
-       // }
+           //
+       //}
 
         return rootView;
     }
@@ -117,7 +121,13 @@ public class ItemDetailFragment extends Fragment implements Controller.BookListC
 
     @Override
     public void onFetchProgressBookDesc(Book bookDesc) {
-        BOOK_Desc_ITEMS = bookDesc;
+        bookDescriptionItem = bookDesc;
+        Log.d("BOOKDESCRIPTION", bookDescriptionItem.getAuthor());
+        ((TextView) rootView.findViewById(R.id.book_title)).setText("Title: " + String.valueOf(bookDescriptionItem.getTitle()));
+        ((TextView) rootView.findViewById(R.id.book_author)).setText("Author: " + String.valueOf(bookDescriptionItem.getAuthor()));
+        ((TextView) rootView.findViewById(R.id.book_isbn)).setText("ISBN: " + String.valueOf(bookDescriptionItem.getIsbn()));
+        ((TextView) rootView.findViewById(R.id.book_author)).setText("Author: " + String.valueOf(bookDescriptionItem.getAuthor()));
+        ((TextView) rootView.findViewById(R.id.book_description)).setText("Description: " + String.valueOf(bookDescriptionItem.getDescription()));
     }
 
     @Override

@@ -1,11 +1,17 @@
 package com.example.bookserverapp.controller;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
+import com.example.bookserverapp.R;
 import com.example.bookserverapp.model.api.BooksListApiManager;
 import com.example.bookserverapp.model.pojo.Book;
 import com.example.bookserverapp.model.pojo.BooksList;
 import com.example.bookserverapp.model.utilities.BookDescEvent;
+import com.example.bookserverapp.view.ItemListActivity;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,22 +29,38 @@ public class Controller {
 
     private static final String TAG = Controller.class.getSimpleName();
     private BookListCallbackListener mListener;
+    private Context context;
+    private ItemListActivity activity;
     private BooksListApiManager mApiManager;
     private static Book bookDesc;
+    private ProgressBar progressBar;
 
     public Controller(BookListCallbackListener listener) {
         mListener = listener;
         mApiManager = new BooksListApiManager();
     }
 
+    public Controller(Context context) {
+        this.context= context;
+        mApiManager = new BooksListApiManager();
+    }
+
+
+    public Controller(ItemListActivity itemListActivity) {
+        this.activity= itemListActivity;
+        mApiManager = new BooksListApiManager();
+    }
+
 
 
     public void startFetching() {
+
         mApiManager.getBookListApi().getBooksList(new Callback<String>() {
             @Override
             public void success(String s, Response response) {
                 try {
                     JSONArray array = new JSONArray(s);
+
 
                     for(int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
@@ -51,7 +73,7 @@ public class Controller {
                         booksList.setPrice(object.getInt("price"));
                         booksList.setCurrencyCode(object.getString("currencyCode"));
                         booksList.setAuthor(object.getString("author"));
-
+                        mListener= activity;
                         mListener.onFetchProgress(booksList);
 
                     }
@@ -83,7 +105,7 @@ public class Controller {
                 bookDesc = gson.fromJson(s, Book.class);
 
                 Log.d("AUTHOR1",bookDesc.getAuthor());
-
+                mListener= mListener;
                 mListener.onFetchProgressBookDesc(bookDesc);
             }
 
